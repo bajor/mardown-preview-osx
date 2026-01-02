@@ -46,12 +46,16 @@ This will:
 - Fetch the [Ink](https://github.com/JohnSundell/Ink) markdown parser via Swift Package Manager
 - Compile the extension
 - Sign it for local use (ad-hoc signing)
-- Install to `~/Applications/MarkdownPreview.app`
+- Install to your **user** Applications folder (not `/Applications`)
 - Reset Quick Look generators
+
+**Note:** The app is installed to `~/Applications/` which is `/Users/YOUR_USERNAME/Applications/`, not the system `/Applications` folder.
 
 ### 3. Register the extension
 
-Open the app once to register the Quick Look extension:
+Open the app once to register the Quick Look extension. In Finder, press `Cmd+Shift+G` and go to `~/Applications`, then double-click `MarkdownPreview.app`.
+
+Or run:
 
 ```bash
 open ~/Applications/MarkdownPreview.app
