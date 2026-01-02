@@ -21,11 +21,11 @@ public class PreviewViewController: NSViewController, QLPreviewingController {
 
     public func preparePreviewOfFile(at url: URL, completionHandler handler: @escaping (Error?) -> Void) {
         do {
-            // Check file size first
+            // Check file size first (skip for .rule files)
             let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
             let fileSize = attributes[.size] as? Int ?? 0
 
-            if fileSize > maxFileSize {
+            if fileSize > maxFileSize && !isRuleFile(url) {
                 handler(NSError(domain: "MarkdownPreview", code: 1, userInfo: [NSLocalizedDescriptionKey: "File too large"]))
                 return
             }
@@ -43,14 +43,17 @@ public class PreviewViewController: NSViewController, QLPreviewingController {
             if isMarkdownFile(url) {
                 // Render as markdown
                 htmlContent = MarkdownRenderer.render(markdown: content, fileName: fileName)
+            } else if isRuleFile(url) {
+                // Always display .rule files without line limit
+                htmlContent = MarkdownRenderer.renderPlainText(content: content, fileName: fileName)
             } else {
-                // Check line count for plain text
+                // Check line count for other plain text files
                 let lineCount = content.components(separatedBy: .newlines).count
                 if lineCount > maxPlainTextLines {
                     handler(NSError(domain: "MarkdownPreview", code: 3, userInfo: [NSLocalizedDescriptionKey: "File has too many lines"]))
                     return
                 }
-                // Display as plain text with syntax highlighting
+                // Display as plain text
                 htmlContent = MarkdownRenderer.renderPlainText(content: content, fileName: fileName)
             }
 
@@ -64,6 +67,10 @@ public class PreviewViewController: NSViewController, QLPreviewingController {
     private func isMarkdownFile(_ url: URL) -> Bool {
         let ext = url.pathExtension.lowercased()
         return ["md", "markdown", "mdown", "mkd", "mkdn"].contains(ext)
+    }
+
+    private func isRuleFile(_ url: URL) -> Bool {
+        return url.pathExtension.lowercased() == "rule"
     }
 
     private func isLikelyTextContent(_ content: String) -> Bool {
