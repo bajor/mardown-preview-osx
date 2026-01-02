@@ -282,50 +282,10 @@ public struct HTMLTemplate {
                     background: transparent;
                     padding: 0;
                 }
-
-                /* Syntax Highlighting - GitHub-inspired */
-                .hljs {
-                    color: var(--text-color);
-                    background: transparent;
-                }
-
-                @media (prefers-color-scheme: light) {
-                    .hljs-comment, .hljs-quote { color: #6a737d; }
-                    .hljs-keyword, .hljs-selector-tag { color: #d73a49; }
-                    .hljs-string, .hljs-attr { color: #032f62; }
-                    .hljs-number, .hljs-literal { color: #005cc5; }
-                    .hljs-variable, .hljs-template-variable { color: #e36209; }
-                    .hljs-type, .hljs-built_in { color: #6f42c1; }
-                    .hljs-title, .hljs-function { color: #6f42c1; }
-                    .hljs-name, .hljs-tag { color: #22863a; }
-                    .hljs-attribute { color: #005cc5; }
-                    .hljs-symbol, .hljs-bullet { color: #005cc5; }
-                    .hljs-section { color: #005cc5; font-weight: bold; }
-                    .hljs-meta { color: #6a737d; }
-                }
-
-                @media (prefers-color-scheme: dark) {
-                    .hljs-comment, .hljs-quote { color: #8b949e; }
-                    .hljs-keyword, .hljs-selector-tag { color: #ff7b72; }
-                    .hljs-string, .hljs-attr { color: #a5d6ff; }
-                    .hljs-number, .hljs-literal { color: #79c0ff; }
-                    .hljs-variable, .hljs-template-variable { color: #ffa657; }
-                    .hljs-type, .hljs-built_in { color: #d2a8ff; }
-                    .hljs-title, .hljs-function { color: #d2a8ff; }
-                    .hljs-name, .hljs-tag { color: #7ee787; }
-                    .hljs-attribute { color: #79c0ff; }
-                    .hljs-symbol, .hljs-bullet { color: #79c0ff; }
-                    .hljs-section { color: #79c0ff; font-weight: bold; }
-                    .hljs-meta { color: #8b949e; }
-                }
             </style>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/makefile.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dockerfile.min.js"></script>
         </head>
         <body>
             \(body)
-            <script>hljs.highlightAll();</script>
         </body>
         </html>
         """

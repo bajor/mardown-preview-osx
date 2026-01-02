@@ -2,6 +2,11 @@
 
 All notable changes to Markdown Preview for macOS will be documented in this file.
 
+## [1.2.1] - 2026-01-02
+
+### Changed
+- Plain text files now display without syntax highlighting (plain monospace text)
+
 ## [1.2.0] - 2026-01-02
 
 ### Added
