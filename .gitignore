@@ -1,0 +1,21 @@
+# Build artifacts
+.build/
+*.app
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# Xcode (legacy project in root)
+/MarkdownPreview/
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Test files
+test.md
