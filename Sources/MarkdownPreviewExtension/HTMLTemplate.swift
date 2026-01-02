@@ -12,26 +12,26 @@ public struct HTMLTemplate {
             <title>\(title)</title>
             <style>
                 :root {
-                    --bg-color: #ffffff;
-                    --text-color: #24292e;
-                    --code-bg: #f6f8fa;
-                    --border-color: #e1e4e8;
-                    --link-color: #0366d6;
-                    --blockquote-color: #6a737d;
-                    --heading-color: #24292e;
-                    --table-stripe: #f6f8fa;
+                    --bg-color: #f5f5f7;
+                    --text-color: #1d1d1f;
+                    --code-bg: #e8e8ed;
+                    --border-color: #d2d2d7;
+                    --link-color: #0066cc;
+                    --blockquote-color: #6e6e73;
+                    --heading-color: #1d1d1f;
+                    --table-stripe: #e8e8ed;
                 }
 
                 @media (prefers-color-scheme: dark) {
                     :root {
-                        --bg-color: #0d1117;
-                        --text-color: #c9d1d9;
-                        --code-bg: #161b22;
-                        --border-color: #30363d;
-                        --link-color: #58a6ff;
-                        --blockquote-color: #8b949e;
-                        --heading-color: #c9d1d9;
-                        --table-stripe: #161b22;
+                        --bg-color: #1d1d1f;
+                        --text-color: #f5f5f7;
+                        --code-bg: #2c2c2e;
+                        --border-color: #3a3a3c;
+                        --link-color: #2997ff;
+                        --blockquote-color: #98989d;
+                        --heading-color: #f5f5f7;
+                        --table-stripe: #2c2c2e;
                     }
                 }
 
@@ -212,6 +212,116 @@ public struct HTMLTemplate {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/makefile.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dockerfile.min.js"></script>
+        </head>
+        <body>
+            \(body)
+            <script>hljs.highlightAll();</script>
+        </body>
+        </html>
+        """
+    }
+
+    /// Renders plain text files with a clean, frameless appearance matching native macOS Quick Look
+    public static func wrapPlainText(body: String, title: String = "") -> String {
+        return """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>\(title)</title>
+            <style>
+                :root {
+                    --bg-color: #f5f5f7;
+                    --text-color: #1d1d1f;
+                }
+
+                @media (prefers-color-scheme: dark) {
+                    :root {
+                        --bg-color: #1d1d1f;
+                        --text-color: #f5f5f7;
+                    }
+                }
+
+                * {
+                    box-sizing: border-box;
+                }
+
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                }
+
+                body {
+                    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+                    font-size: 12px;
+                    line-height: 1.5;
+                    color: var(--text-color);
+                    background-color: var(--bg-color);
+                    padding: 16px 20px;
+                }
+
+                pre {
+                    margin: 0;
+                    padding: 0;
+                    background: transparent;
+                    border: none;
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
+                    font-family: inherit;
+                    font-size: inherit;
+                    line-height: inherit;
+                }
+
+                code {
+                    font-family: inherit;
+                    font-size: inherit;
+                    background: transparent;
+                    padding: 0;
+                }
+
+                /* Syntax Highlighting - GitHub-inspired */
+                .hljs {
+                    color: var(--text-color);
+                    background: transparent;
+                }
+
+                @media (prefers-color-scheme: light) {
+                    .hljs-comment, .hljs-quote { color: #6a737d; }
+                    .hljs-keyword, .hljs-selector-tag { color: #d73a49; }
+                    .hljs-string, .hljs-attr { color: #032f62; }
+                    .hljs-number, .hljs-literal { color: #005cc5; }
+                    .hljs-variable, .hljs-template-variable { color: #e36209; }
+                    .hljs-type, .hljs-built_in { color: #6f42c1; }
+                    .hljs-title, .hljs-function { color: #6f42c1; }
+                    .hljs-name, .hljs-tag { color: #22863a; }
+                    .hljs-attribute { color: #005cc5; }
+                    .hljs-symbol, .hljs-bullet { color: #005cc5; }
+                    .hljs-section { color: #005cc5; font-weight: bold; }
+                    .hljs-meta { color: #6a737d; }
+                }
+
+                @media (prefers-color-scheme: dark) {
+                    .hljs-comment, .hljs-quote { color: #8b949e; }
+                    .hljs-keyword, .hljs-selector-tag { color: #ff7b72; }
+                    .hljs-string, .hljs-attr { color: #a5d6ff; }
+                    .hljs-number, .hljs-literal { color: #79c0ff; }
+                    .hljs-variable, .hljs-template-variable { color: #ffa657; }
+                    .hljs-type, .hljs-built_in { color: #d2a8ff; }
+                    .hljs-title, .hljs-function { color: #d2a8ff; }
+                    .hljs-name, .hljs-tag { color: #7ee787; }
+                    .hljs-attribute { color: #79c0ff; }
+                    .hljs-symbol, .hljs-bullet { color: #79c0ff; }
+                    .hljs-section { color: #79c0ff; font-weight: bold; }
+                    .hljs-meta { color: #8b949e; }
+                }
+            </style>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/makefile.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dockerfile.min.js"></script>
         </head>
         <body>
             \(body)

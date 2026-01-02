@@ -23,7 +23,7 @@ public struct MarkdownRenderer {
         let codeClass = language.isEmpty ? "" : "class=\"language-\(language)\""
 
         let htmlBody = "<pre><code \(codeClass)>\(escaped)</code></pre>"
-        return HTMLTemplate.wrap(body: htmlBody, title: fileName)
+        return HTMLTemplate.wrapPlainText(body: htmlBody, title: fileName)
     }
 
     private static func detectLanguage(from fileName: String) -> String {
