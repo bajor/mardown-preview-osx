@@ -2,6 +2,16 @@
 
 All notable changes to Markdown Preview for macOS will be documented in this file.
 
+## [1.4.0] - 2026-01-02
+
+### Added
+- Test script (`test.sh`) for verifying builds
+- Supported file types table in README
+
+### Changed
+- Updated README with current features and correct repository URL
+- Improved documentation structure
+
 ## [1.3.0] - 2026-01-02
 
 ### Changed

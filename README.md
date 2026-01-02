@@ -4,17 +4,15 @@ A Quick Look extension that renders Markdown files with GitHub-style formatting 
 
 **Built without Xcode** - only requires Swift Command Line Tools.
 
-![Preview Example](https://via.placeholder.com/600x400?text=Markdown+Preview)
-
 ## Features
 
-- GitHub-style CSS rendering
-- Light and dark mode support (follows system preference)
-- Syntax highlighting for code blocks
+- **Markdown rendering** with GitHub-style CSS
+- **Light and dark mode** support (follows system preference)
+- **Syntax highlighting** for code blocks in markdown files
 - Full markdown support: headers, tables, code blocks, blockquotes, lists, images
-- **Plain text file support**: Previews extensionless files like `LICENSE`, `Makefile`, `Dockerfile`, `.gitignore`, etc.
-  - Only shows files ≤100 lines and ≤50KB (to avoid binaries)
-  - Auto-detects language for syntax highlighting
+- **`.rule` file support**: Displays rule files as plain text without size limits
+- **Plain text previews**: Supports extensionless files like `LICENSE`, `Makefile`, `Dockerfile`, `.gitignore`, etc.
+  - Shows files ≤100 lines and ≤50KB (to avoid binaries)
 
 ## Requirements
 
@@ -34,8 +32,8 @@ xcode-select --install
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/markdown-preview-osx.git
-cd markdown-preview-osx
+git clone https://github.com/bajor/mardown-preview-osx.git
+cd mardown-preview-osx
 ```
 
 ### 2. Build and install
@@ -62,9 +60,17 @@ open ~/Applications/MarkdownPreview.app
 ### 4. Use it
 
 1. Open Finder
-2. Navigate to any `.md` file
+2. Navigate to any `.md` or `.rule` file
 3. Select the file and press **spacebar**
-4. See your beautifully rendered markdown!
+4. See your beautifully rendered content!
+
+## Testing
+
+Run the test script to verify the build:
+
+```bash
+./test.sh
+```
 
 ## Troubleshooting
 
@@ -109,6 +115,9 @@ qlmanage -p /path/to/your/file.md
 .
 ├── Package.swift                      # Swift Package Manager manifest
 ├── build.sh                           # Build script
+├── test.sh                            # Test script
+├── VERSION                            # Current version
+├── CHANGELOG.md                       # Version history
 ├── Sources/
 │   ├── MarkdownPreview/
 │   │   └── AppDelegate.swift          # Container app (minimal)
@@ -128,8 +137,16 @@ qlmanage -p /path/to/your/file.md
 1. **Quick Look Integration**: The extension implements `QLPreviewingController` protocol
 2. **Markdown Parsing**: Uses [Ink](https://github.com/JohnSundell/Ink) Swift library to convert markdown to HTML
 3. **Rendering**: Displays HTML in a `WKWebView` with GitHub-inspired CSS
-4. **Code Highlighting**: Uses [highlight.js](https://highlightjs.org/) for syntax highlighting
+4. **Code Highlighting**: Uses [highlight.js](https://highlightjs.org/) for syntax highlighting in markdown code blocks
 5. **Binary Detection**: Checks file size and content to avoid displaying binary files
+
+## Supported File Types
+
+| Type | Extensions/Files | Notes |
+|------|------------------|-------|
+| Markdown | `.md`, `.markdown`, `.mdown`, `.mkd`, `.mkdn` | Full rendering with syntax highlighting |
+| Rule files | `.rule` | Plain text, no size limits |
+| Plain text | `.txt`, `.gitignore`, `LICENSE`, `Makefile`, etc. | ≤100 lines, ≤50KB |
 
 ## Uninstall
 
