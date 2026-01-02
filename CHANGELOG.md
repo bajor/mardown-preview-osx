@@ -2,6 +2,11 @@
 
 All notable changes to Markdown Preview for macOS will be documented in this file.
 
+## [1.2.0] - 2026-01-02
+
+### Added
+- Support for `.rule` file extension (displays as plain text)
+
 ## [1.1.0] - 2026-01-02
 
 ### Fixed

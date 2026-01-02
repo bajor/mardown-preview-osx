@@ -105,6 +105,7 @@ public struct MarkdownRenderer {
             "conf": "ini",
             "cfg": "ini",
             "txt": "plaintext",
+            "rule": "plaintext",
         ]
 
         return extMap[ext] ?? ""
