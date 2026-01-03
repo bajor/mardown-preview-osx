@@ -1,0 +1,68 @@
+# Gitleaks configuration file
+# https://github.com/gitleaks/gitleaks
+
+title = "Gitleaks Configuration"
+
+[extend]
+# Use the default gitleaks rules as a base
+useDefault = true
+
+# Files to ignore
+[allowlist]
+description = "Allowlisted files and patterns"
+paths = [
+    '''\.git/''',
+    '''\.gitleaks\.toml$''',
+    '''secret-scanning\.yml$''',
+    '''\.md$''',
+    '''CHANGELOG\.md$''',
+    '''README\.md$''',
+]
+
+# Regex patterns to ignore (false positives)
+regexes = [
+    # Example patterns that are not secrets
+    '''example\.com''',
+    '''test@test\.com''',
+    '''placeholder''',
+    '''YOUR_.*_HERE''',
+    '''<.*>''',  # Placeholder patterns like <API_KEY>
+]
+
+# Custom rules for additional secret patterns
+[[rules]]
+id = "apple-developer-certificate"
+description = "Apple Developer Certificate"
+regex = '''-----BEGIN CERTIFICATE-----'''
+path = '''\.p12$|\.cer$|\.pem$'''
+keywords = ["certificate", "apple"]
+
+[[rules]]
+id = "xcode-provisioning-profile"
+description = "Xcode Provisioning Profile"
+regex = '''<key>.*ProvisioningProfile.*</key>'''
+path = '''\.mobileprovision$|\.provisionprofile$'''
+
+[[rules]]
+id = "ios-keychain-password"
+description = "iOS Keychain Password"
+regex = '''(?i)(keychain[_-]?password|kSecAttrAccount)\s*[:=]\s*["'][^"']{8,}["']'''
+keywords = ["keychain", "password"]
+
+[[rules]]
+id = "firebase-config"
+description = "Firebase Configuration"
+regex = '''(?i)(firebase[_-]?api[_-]?key|FIREBASE_TOKEN)\s*[:=]\s*["'][A-Za-z0-9_-]{20,}["']'''
+keywords = ["firebase"]
+
+[[rules]]
+id = "app-store-connect"
+description = "App Store Connect API Key"
+regex = '''(?i)(appstore[_-]?connect|ASC_)[A-Z_]*\s*[:=]\s*["'][^"']{10,}["']'''
+keywords = ["appstore", "connect"]
+
+[[rules]]
+id = "base64-encoded-secret"
+description = "Base64 Encoded Secret"
+regex = '''(?i)(secret|password|token|key)[_-]?base64\s*[:=]\s*["'][A-Za-z0-9+/=]{40,}["']'''
+keywords = ["base64", "secret"]
